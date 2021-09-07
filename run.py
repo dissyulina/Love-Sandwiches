@@ -1,5 +1,6 @@
 import gspread #import library gspread
 from google.oauth2.service_account import Credentials #import the credentials class from google auth
+from pprint import pprint #import pprint to make the list structure more readable
 
 #constant variables, written all in capital
 SCOPE = [
@@ -59,7 +60,20 @@ def update_sales_worksheet(data):
     sales_worksheet.append_row(data)
     print("Sales worksheet updated successfully.\n")
 
+def calculate_surplus_data(sales_row):
+    print("calculating surplus data...\n")
+    stock = SHEET.worksheet("stock").get_all_values()
+    stock_row = stock[-1]
+    print(stock_row)
 
-data = get_sales_data()
-sales_data = [int(num) for num in data]
-update_sales_worksheet(sales_data)
+def main():
+    """
+    Calculate all program function
+    """
+    data = get_sales_data()
+    sales_data = [int(num) for num in data]
+    update_sales_worksheet(sales_data)
+    calculate_surplus_data(sales_data)
+
+print("Welcome to Love Sandwiches Data Automation")
+main()
