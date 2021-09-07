@@ -25,7 +25,7 @@ def get_sales_data():
     print(f"The data provided is {data_str}")
 
     sales_data = data_str.split(",") #turn string into list
-    
+
     validate_data(sales_data)
 
 
@@ -36,6 +36,7 @@ def validate_data(values):
     or if there aren't exactly 6 values.
     """
     try:
+        [int(value) for value in values] #list comprehension
         if len(values) != 6:
             raise ValueError(
                 f"Exactly 6 values required, you provided {len(values)}"
